@@ -1,0 +1,9 @@
+image: clever/drone-node:6.2.2
+notify:
+  email:
+    recipients:
+    - drone@clever.com
+publish:
+script:
+- make test
+- make build
