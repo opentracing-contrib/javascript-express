@@ -1,5 +1,5 @@
-import * as lightstep from "lightstep-tracer";
-import * as tracer from "opentracing";
+import lightstep from "lightstep-tracer";
+import tracer from "opentracing";
 import * as url from "url";
 
 export default function middleware(options = {}) {
