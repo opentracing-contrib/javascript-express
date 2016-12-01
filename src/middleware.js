@@ -1,19 +1,18 @@
 import * as lightstep from "lightstep-tracer";
-import * as opentracing from "opentracing";
+import * as tracer from "opentracing";
 import * as url from "url";
 
 export default function middleware(options = {}) {
-  let tracer;
   if (options.tracer) {
-    tracer = options.tracer;
+    tracer.initGlobalTracer(options.tracer);
   } else if (options.access_token) {
     // default to lightstep if no tracer is given but access_token is provided
-    tracer = lightstep.tracer({
+    tracer.initGlobalTracer(lightstep.tracer({
       access_token: options.access_token,
       component_name: options.source,
-    });
+    }));
   } else {
-    tracer = new opentracing.Tracer();
+    tracer.initGlobalTracer();
   }
 
   return (req, res, next) => {
