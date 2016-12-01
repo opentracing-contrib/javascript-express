@@ -4,6 +4,10 @@ notify:
     recipients:
     - drone@clever.com
 publish:
+  npm:
+    token: $$npm_token
+    when:
+      branch: master
 script:
 - npm install
 - make test
