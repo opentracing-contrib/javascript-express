@@ -1,4 +1,4 @@
-.PHONY: all test build run
+.PHONY: all test build
 SHELL := /bin/bash
 
 all: test build
@@ -6,8 +6,11 @@ all: test build
 test:
 	echo "TODO test app"
 
-build:
-	echo "TODO build app"
+build: clean
+	@cp -r src dist
+	@echo '✓ Copy /src to /dist'
 
-run: build
-	echo "TODO run app"
+clean:
+	@rm -rf dist
+	@echo '✓ Clean out dist directory'
+

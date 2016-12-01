@@ -1,0 +1,31 @@
+{
+  "name": "tracing-middleware",
+  "version": "0.1.0",
+  "description": "opentracing middleware for express-js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Clever/tracing-middleware.git"
+  },
+  "keywords": [
+    "tracing",
+    "opentracing",
+    "middleware"
+  ],
+  "author": "Clever",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Clever/tracing-middleware/issues"
+  },
+  "homepage": "https://github.com/Clever/tracing-middleware#readme",
+  "dependencies": {
+    "lightstep-tracer": "^0.11.20",
+    "opentracing": "^0.11.1"
+  },
+  "devDependencies": {
+    "sinon": "^1.17.6"
+  }
+}
