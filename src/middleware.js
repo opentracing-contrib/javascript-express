@@ -44,7 +44,6 @@ export default function middleware(options = {}) {
       }
       span.finish();
     });
-
     next();
   };
 }
