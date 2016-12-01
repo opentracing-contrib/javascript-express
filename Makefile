@@ -7,8 +7,8 @@ test:
 	echo "TODO test app"
 
 build: clean
-	@cp -r src dist
-	@echo '✓ Copy /src to /dist'
+	@npm run-script build
+	@echo '✓ Transpile to es5, output to dist'
 
 clean:
 	@rm -rf dist
