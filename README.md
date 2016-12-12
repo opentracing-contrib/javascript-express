@@ -4,7 +4,7 @@ Middleware for express to enable opentracing. Configured for Lightstep, but supp
 
 ## Install
 ```
-npm install --save "tracing-middleware
+npm install --save "tracing-middleware"
 ```
 
 ## Usage
