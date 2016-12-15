@@ -17,8 +17,8 @@ export default function middleware(options = {}) {
 
   return (req, res, next) => {
     const wireCtx = tracer.extract(tracer.FORMAT_HTTP_HEADERS, req.headers);
-    const urlp = url.parse(req.url);
-    const span = tracer.startSpan(urlp.pathname, {childOf: wireCtx});
+    const pathname = url.parse(req.url).pathname
+    const span = tracer.startSpan(pathname, {childOf: wireCtx});
     span.logEvent("request_received");
 
     // include some useful tags on the trace
@@ -38,6 +38,10 @@ export default function middleware(options = {}) {
     // finalize the span when the response is completed
     res.on("finish", () => {
       span.logEvent("request_finished");
+      // Route matching often happens after the middleware is run. Try changing the operation name
+      // to the route matcher.
+      const opName = (req.route && req.route.path) || pathname
+      span.setOperationName(opName)
       span.setTag("http.status_code", res.statusCode);
       if (res.statusCode >= 500) {
         span.setTag("error", true);
