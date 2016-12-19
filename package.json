@@ -1,6 +1,6 @@
 {
   "name": "tracing-middleware",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "opentracing middleware for express-js",
   "main": "dist/index.js",
   "publishConfig": {
@@ -27,11 +27,15 @@
   "homepage": "https://github.com/Clever/tracing-middleware#readme",
   "dependencies": {
     "lightstep-tracer": "^0.11.20",
-    "opentracing": "^0.11.1"
+    "opentracing": "^0.13.0"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-preset-latest": "^6.16.0",
-    "sinon": "^1.17.6"
+    "express": "3.x.x",
+    "mocha": "^3.2.0",
+    "request": "^2.79.0",
+    "sinon": "^1.17.6",
+    "underscore": "^1.8.3"
   }
 }
