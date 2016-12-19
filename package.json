@@ -1,6 +1,6 @@
 {
   "name": "tracing-middleware",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "opentracing middleware for express-js",
   "main": "dist/index.js",
   "publishConfig": {
