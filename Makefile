@@ -1,10 +1,13 @@
 .PHONY: all test build
 SHELL := /bin/bash
+TESTS=$(shell cd test && ls *.js | sed s/\.js$$//)
 
 all: test build
 
-test:
-	echo "TODO test app"
+test: build $(TESTS)
+
+$(TESTS):
+	NODE_ENV=test node_modules/mocha/bin/mocha -R spec --ignore-leaks --bail --timeout 60000 test/$@.js
 
 build: clean
 	@npm run-script build
@@ -13,4 +16,3 @@ build: clean
 clean:
 	@rm -rf dist
 	@echo '✓ Clean out dist directory'
-
