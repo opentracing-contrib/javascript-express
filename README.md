@@ -1,28 +1,35 @@
 # tracing-middleware
 
-Middleware for express to enable opentracing. Configured for Lightstep, but supports any opentracing implementation.
+Middleware for express to enable opentracing.
+Supports any opentracing tracer compatible with version 0.11.0 of the opentracing javascript library.
 
 ## Install
 ```
-npm install --save "tracing-middleware"
+npm install --save tracing-middleware
 ```
 
 ## Usage
+
+E.g., using LightStep as your tracer:
+
 ```
 import * as express from "express";
 import middleware from "tracing-middleware";
+import * as LightStep from "lightstep-tracer";
+
+const lsTracer = LightStep.tracer({
+  access_token   : 'foo',
+  component_name : 'bar',
+});
 
 const app = express();
-const LIGHTSTEP_ACCESS_TOKEN = "access_token";
-app.use(middleware({access_token: LIGHTSTEP_ACCESS_TOKEN}));
+app.use(middleware({tracer: lsTracer}));
 ```
 
 ## Options
 The `middleware` function takes in an options object as its only argument.
 ```
 const options = {
-  tracer: {}, // Override the tracer used in this middleware with your own custom tracing implementation
-  access_token: "Lightstep access token", // Creates a lightstep tracer if provided
+  tracer: [Tracer], // Defaults to the opentracing no-op tracer.
 }
 ```
-If neither `tracer` nor `access_token` is provided (e.g. `app.use(middleware())`), then the default opentracing library is used.
