@@ -50,6 +50,37 @@ describe("e2e express app", () => {
     });
   });
 
+  it("sets an error tag and sampling priority on 5XX responses", (done) => {
+    const app = express();
+    app.use(middleware({}));
+    let spanTags = null;
+    app.get("/", (req, res) => {
+      if (req.span) {
+        req.span.setTag = sinon.spy();
+        res.on("finish", () => {
+          spanTags = req.span.setTag.args
+        });
+      }
+      res.status(500).send("ruhroh!");
+    });
+    const server = app.listen(3000, (err) => {
+      const opts = {
+        url : "http://localhost:3000/",
+        method: "GET",
+      };
+      request(opts, (err, res, body) => {
+        assert.ifError(err);
+        assert.equal(res.statusCode, 500, body);
+        assert.deepEqual(spanTags, [
+          ['http.status_code', 500],
+          ['error', true],
+          ['sampling.priority', 1 ]
+        ]);
+        server.close();
+        done();
+      });
+    });
+  });
 
   it("works with latest lightstep tracer", (done) => {
     const lsTracer = LightStep.tracer({

@@ -38,6 +38,7 @@ export default function middleware(options = {}) {
       span.setTag("http.status_code", res.statusCode);
       if (res.statusCode >= 500) {
         span.setTag("error", true);
+        span.setTag("sampling.priority", 1);
       }
       span.finish();
     });
