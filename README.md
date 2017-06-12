@@ -1,3 +1,5 @@
+[![OpenTracing Badge](https://img.shields.io/badge/OpenTracing-enabled-blue.svg)](http://opentracing.io)
+
 # tracing-middleware
 
 Middleware for express to enable opentracing.
