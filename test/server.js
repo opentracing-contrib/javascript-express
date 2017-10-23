@@ -9,8 +9,9 @@ const sinon = require("sinon");
 describe("e2e express app", () => {
   it("works with default tracer", (done) => {
     const app = express();
+    const tracer = opentracing.globalTracer();
     app.use(middleware({}));
-    const startSpanSpy = sinon.spy(opentracing, "startSpan");
+    const startSpanSpy = sinon.spy(tracer, "startSpan");
 
     let reqSpanPresent = false;
     app.get("/", (req, res) => {
@@ -83,7 +84,7 @@ describe("e2e express app", () => {
   });
 
   it("works with latest lightstep tracer", (done) => {
-    const lsTracer = LightStep.tracer({
+    const lsTracer = new LightStep.Tracer({
       access_token   : 'foo',
       component_name : 'bar',
     });
