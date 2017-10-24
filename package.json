@@ -1,6 +1,6 @@
 {
-  "name": "tracing-middleware",
-  "version": "0.3.0",
+  "name": "expression-opentracing",
+  "version": "0.1.0",
   "description": "opentracing middleware for express-js",
   "main": "dist/index.js",
   "publishConfig": {
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Clever/tracing-middleware.git"
+    "url": "git+https://github.com/opentracing-contrib/javascript-express.git"
   },
   "keywords": [
     "tracing",
@@ -22,9 +22,9 @@
   "author": "Clever",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/Clever/tracing-middleware/issues"
+    "url": "https://github.com/opentracing-contrib/javascript-express/issues"
   },
-  "homepage": "https://github.com/Clever/tracing-middleware#readme",
+  "homepage": "https://github.com/opentracing-contrib/javascript-express#readme",
   "dependencies": {
     "opentracing": "^0.14.0"
   },

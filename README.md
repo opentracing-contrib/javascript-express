@@ -1,11 +1,11 @@
-# tracing-middleware
+# express-opentracing
 
 Middleware for express to enable opentracing.
 Supports any opentracing tracer compatible with version 0.11.0 of the opentracing javascript library.
 
 ## Install
 ```
-npm install --save tracing-middleware
+npm install --save express-opentracing
 ```
 
 ## Usage
@@ -14,7 +14,7 @@ E.g., using LightStep as your tracer:
 
 ```
 import * as express from "express";
-import middleware from "tracing-middleware";
+import middleware from "express-opentracing";
 import * as LightStep from "lightstep-tracer";
 
 const lsTracer = LightStep.tracer({
