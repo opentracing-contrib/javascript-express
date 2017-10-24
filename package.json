@@ -1,5 +1,5 @@
 {
-  "name": "expression-opentracing",
+  "name": "express-opentracing",
   "version": "0.1.0",
   "description": "opentracing middleware for express-js",
   "main": "dist/index.js",
