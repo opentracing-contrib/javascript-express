@@ -26,6 +26,20 @@ const app = express();
 app.use(middleware({tracer: lsTracer}));
 ```
 
+To trace specific HTTP calls, or to exclude certain calls (e.g. hosted static content), modify `app.use(middleware())` above:
+
+```javascript
+
+app.use((req, res, next) => {
+  // exclude paths that start with '/css' or '/js'
+  if (req.path.startsWith("/css") || req.path.startsWith('/js')) {
+    return next()
+  }
+  // trace calls
+  middleware({tracer: tracer})(req, res, next);
+});
+```
+
 ## Options
 The `middleware` function takes in an options object as its only argument.
 ```
