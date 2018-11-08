@@ -1,10 +1,10 @@
 # express-opentracing
 
-Middleware for express to enable opentracing.
+Middleware for [express](http://expressjs.com) to enable [opentracing](https://opentracing.io).
 Supports any opentracing tracer compatible with version 0.11.0 of the opentracing javascript library.
 
 ## Install
-```
+```sh
 npm install --save express-opentracing
 ```
 
@@ -12,7 +12,7 @@ npm install --save express-opentracing
 
 E.g., using LightStep as your tracer:
 
-```
+```js
 import * as express from "express";
 import middleware from "express-opentracing";
 import * as LightStep from "lightstep-tracer";
@@ -28,8 +28,7 @@ app.use(middleware({tracer: lsTracer}));
 
 To trace specific HTTP calls, or to exclude certain calls (e.g. hosted static content), modify `app.use(middleware())` above:
 
-```javascript
-
+```js
 app.use((req, res, next) => {
   // exclude paths that start with '/css' or '/js'
   if (req.path.startsWith("/css") || req.path.startsWith('/js')) {
@@ -42,7 +41,7 @@ app.use((req, res, next) => {
 
 ## Options
 The `middleware` function takes in an options object as its only argument.
-```
+```js
 const options = {
   tracer: [Tracer], // Defaults to the opentracing no-op tracer.
 }
