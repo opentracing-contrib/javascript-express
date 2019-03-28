@@ -39,6 +39,14 @@ app.use((req, res, next) => {
 });
 ```
 
+To use a span (e.g for logging) access the `req.span` object from your handler:
+
+```js
+app.use((req, res, next) => {
+  req.span.log({ event: 'handler_triggered' })
+})
+```
+
 ## Options
 The `middleware` function takes in an options object as its only argument.
 ```js
