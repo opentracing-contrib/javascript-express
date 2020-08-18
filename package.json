@@ -3,6 +3,7 @@
   "version": "0.1.1",
   "description": "opentracing middleware for express-js",
   "main": "dist/index.js",
+  "types": "index.d.ts",
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
