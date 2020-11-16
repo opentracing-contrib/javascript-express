@@ -10,10 +10,12 @@ export default function middleware(options = {}) {
     const span = tracer.startSpan(pathname, {childOf: wireCtx});
     span.logEvent("request_received");
 
+    const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+
     // include some useful tags on the trace
     span.setTag("http.method", req.method);
     span.setTag("span.kind", "server");
-    span.setTag("http.url", req.url);
+    span.setTag("http.url", fullUrl);
 
     // include trace ID in headers so that we can debug slow requests we see in
     // the browser by looking up the trace ID found in response headers
