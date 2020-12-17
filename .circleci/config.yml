@@ -1,0 +1,77 @@
+version: 2.1
+
+executors:
+  linux:
+    docker:
+      - image: cimg/base:2020.01
+  nodejs:
+    docker:
+      - image: circleci/node:14.15.2
+
+
+orbs:
+  node: circleci/node@4.1.0
+
+jobs:
+  build:
+    executor: nodejs
+    steps:
+      - checkout
+
+      - node/install-packages
+
+      - run: make build
+
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
+  test:
+    parameters:
+      node-version:
+        type: string
+    executor: linux
+    steps:
+      - attach_workspace:
+          at: ~/project
+
+      - node/install:
+          node-version: << parameters.node-version >>
+
+      - run: make test-ci
+
+  release:
+    executor: nodejs
+    steps:
+      - attach_workspace:
+          at: ~/project
+
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+
+      - run:
+          name: Publish package
+          command: npm publish
+
+workflows:
+  version: 2
+  release:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+          matrix:
+            parameters:
+              node-version:
+                - "10.23.0"
+                - "12.20.0"
+                - "14.15.2"
+      - release:
+          requires:
+            - build
+            - test
+          filters:
+            branches:
+              only: master

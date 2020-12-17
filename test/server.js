@@ -28,7 +28,7 @@ describe("e2e express app", () => {
       };
       request(opts, (err, res, body) => {
         assert.ifError(err);
-        assert.equal(res.statusCode, 200, body);
+        assert.strictEqual(res.statusCode, 200, body);
         assert(reqSpanPresent, "expected req.span to be set");
         assert(startSpanSpy.calledOnce, "expected only one span");
         // TODO: once lightstep supports opentracing 0.13.0, we can use
@@ -40,11 +40,11 @@ describe("e2e express app", () => {
         //  "http.url": "/",
         //  "http.status_code": 200,
         //});
-        //assert.equal(span._operationName, "/");
-        //assert.equal(span._logs.length, 2, "expected two logs in the span");
+        //assert.strictEqual(span._operationName, "/");
+        //assert.strictEqual(span._logs.length, 2, "expected two logs in the span");
         //const [startLog, finishLog] = span._logs;
-        //assert.equal(startLog.fields.event, "request_received");
-        //assert.equal(finishLog.fields.event, "request_finished");
+        //assert.strictEqual(startLog.fields.event, "request_received");
+        //assert.strictEqual(finishLog.fields.event, "request_finished");
         server.close();
         done();
       });
@@ -71,8 +71,8 @@ describe("e2e express app", () => {
       };
       request(opts, (err, res, body) => {
         assert.ifError(err);
-        assert.equal(res.statusCode, 500, body);
-        assert.deepEqual(spanTags, [
+        assert.strictEqual(res.statusCode, 500, body);
+        assert.deepStrictEqual(spanTags, [
           ['http.status_code', 500],
           ['error', true],
           ['sampling.priority', 1 ]
@@ -106,7 +106,7 @@ describe("e2e express app", () => {
       };
       request(opts, (err, res, body) => {
         assert.ifError(err);
-        assert.equal(res.statusCode, 200, body);
+        assert.strictEqual(res.statusCode, 200, body);
         assert(reqSpanPresent, "expected req.span to be set");
         server.close();
         done();

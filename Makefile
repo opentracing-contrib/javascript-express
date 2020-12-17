@@ -6,6 +6,8 @@ all: test build
 
 test: build $(TESTS)
 
+test-ci: $(TESTS)
+
 $(TESTS):
 	NODE_ENV=test node_modules/mocha/bin/mocha -R spec --ignore-leaks --bail --timeout 60000 test/$@.js
 
