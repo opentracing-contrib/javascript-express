@@ -1,45 +1,45 @@
 {
-  "name": "express-opentracing",
-  "version": "0.1.1",
-  "description": "opentracing middleware for express-js",
-  "main": "dist/index.js",
-  "types": "index.d.ts",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "./node_modules/.bin/babel src -d dist"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/opentracing-contrib/javascript-express.git"
-  },
-  "keywords": [
-    "tracing",
-    "opentracing",
-    "middleware"
-  ],
-  "author": "Clever",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/opentracing-contrib/javascript-express/issues"
-  },
-  "homepage": "https://github.com/opentracing-contrib/javascript-express#readme",
-  "dependencies": {
-    "opentracing": "^0.14.0"
-  },
-  "peerDependencies": {
-    "opentracing": "^0.14.0"
-  },
-  "devDependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-preset-latest": "^6.16.0",
-    "express": "4.x.x",
-    "lightstep-tracer": "^0.20.3",
-    "mocha": "^3.2.0",
-    "request": "^2.79.0",
-    "sinon": "^1.17.7",
-    "underscore": "^1.8.3"
-  }
+	"name": "express-opentracing",
+	"version": "0.1.1",
+	"description": "opentracing middleware for express-js",
+	"main": "dist/index.js",
+	"types": "index.d.ts",
+	"publishConfig": {
+		"registry": "https://registry.npmjs.org"
+	},
+	"scripts": {
+		"build": "babel src -d dist"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/opentracing-contrib/javascript-express.git"
+	},
+	"keywords": [
+		"tracing",
+		"opentracing",
+		"middleware"
+	],
+	"author": "Clever",
+	"license": "Apache-2.0",
+	"bugs": {
+		"url": "https://github.com/opentracing-contrib/javascript-express/issues"
+	},
+	"homepage": "https://github.com/opentracing-contrib/javascript-express#readme",
+	"dependencies": {
+		"opentracing": "^0.14.5"
+	},
+	"peerDependencies": {
+		"opentracing": "^0.14.5"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.12.10",
+		"@babel/core": "^7.12.10",
+		"@babel/preset-env": "^7.12.11",
+		"express": "4.x.x",
+		"lightstep-tracer": "^0.30.2",
+		"mocha": "^8.2.1",
+		"request": "^2.79.0",
+		"sinon": "^9.2.2",
+		"underscore": "^1.12.0"
+	}
 }
