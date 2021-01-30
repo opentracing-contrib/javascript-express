@@ -9,9 +9,13 @@ const sinon = require("sinon");
 describe("e2e express app", () => {
   it("works with default tracer", (done) => {
     const app = express();
-    const tracer = opentracing.globalTracer();
-    app.use(middleware({}));
-    const startSpanSpy = sinon.spy(tracer, "startSpan");
+
+    const mockTracer = new opentracing.MockTracer();
+    const startSpanSpy = sinon.spy(mockTracer, "startSpan");
+    // Not implemented yet
+    mockTracer._inject = mockTracer.extract = () => {}
+
+    app.use(middleware({tracer: mockTracer}));
 
     let reqSpanPresent = false;
     app.get("/", (req, res) => {
@@ -31,20 +35,18 @@ describe("e2e express app", () => {
         assert.equal(res.statusCode, 200, body);
         assert(reqSpanPresent, "expected req.span to be set");
         assert(startSpanSpy.calledOnce, "expected only one span");
-        // TODO: once lightstep supports opentracing 0.13.0, we can use
-        // mocktracer and verify some more details on the span itself
-        //const span = mockTracer._spans[0];
-        //assert.deepEqual(span._tags, {
-        //  "http.method": "GET",
-        //  "span.kind": "server",
-        //  "http.url": "/",
-        //  "http.status_code": 200,
-        //});
-        //assert.equal(span._operationName, "/");
-        //assert.equal(span._logs.length, 2, "expected two logs in the span");
-        //const [startLog, finishLog] = span._logs;
-        //assert.equal(startLog.fields.event, "request_received");
-        //assert.equal(finishLog.fields.event, "request_finished");
+        const span = mockTracer._spans[0];
+        assert.deepEqual(span._tags, {
+          "http.method": "GET",
+          "span.kind": "server",
+          "http.url": "/",
+          "http.status_code": 200,
+        });
+        assert.equal(span._operationName, "/");
+        assert.equal(span._logs.length, 3, "expected three logs in the span");
+        const [receivedLog, finishLog] = span._logs;
+        assert.equal(receivedLog.fields.event, "request_received");
+        assert.equal(finishLog.fields.event, "response_finished");
         server.close();
         done();
       });

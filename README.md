@@ -17,7 +17,7 @@ import * as express from "express";
 import middleware from "express-opentracing";
 import * as LightStep from "lightstep-tracer";
 
-const lsTracer = LightStep.tracer({
+const lsTracer = new LightStep.Tracer({
   access_token   : 'foo',
   component_name : 'bar',
 });
