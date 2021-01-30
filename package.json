@@ -21,6 +21,13 @@
     "middleware"
   ],
   "author": "Clever",
+  "contributors": [
+    {
+      "name" : "johnytiago", 
+      "email" : "me@joaotiago.dev",
+      "url" : "https://github.com/johnytiago"
+    }
+  ],
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/opentracing-contrib/javascript-express/issues"
